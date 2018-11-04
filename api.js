@@ -2,8 +2,6 @@ const axios = require('axios')
 
 const baseURL = 'https://como-fazer-logusit.firebaseio.com/'
 
-
-// CATEGORIAS
 // Create
 const create = async (key, data) => {
     await axios.post(baseURL + `/` + `${key}` + '.json', data)
@@ -47,8 +45,6 @@ const apagar = async (key, id) => {
     await axios.delete(baseURL + key + '/' + id + '.json')
     return true
 }
-
-
 
 // Exporta todos os módulos
 module.exports = {

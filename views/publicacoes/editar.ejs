@@ -1,0 +1,5 @@
+<form method="POST" action='/publicacoes/editar/<%= publicacao.id %>'>
+    <input placeholder="Insira o nome da publicacao" type='text' name='nome' value="<%= publicacao.publicacao.nome %>" /><br />
+    <textarea placeholder="Insira a descricao da publicacao" type='text' name='descricao'><%= publicacao.publicacao.descricao %></textarea>
+    <button>Salvar edição</button>
+</form>

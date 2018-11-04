@@ -1,0 +1,7 @@
+<a href="/publicacoes/nova">Nova publicação</a><br />
+<% publicacoes.forEach(publicacao => { %>
+<%= publicacao.publicacao.nome %>
+<a href="/publicacoes/editar/<%= publicacao.id %>">Editar</a>
+<a href="/publicacoes/excluir/<%= publicacao.id %>">Excluir</a>
+<br />
+<% }) %>

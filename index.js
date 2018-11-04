@@ -3,6 +3,8 @@ const app = express()
 const bodyParser = require('body-parser')
 const axios = require('axios')
 const categorias = require('./routes/categorias')
+const publicacoes = require('./routes/publicacoes')
+const api = require('./api')
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded())
@@ -10,13 +12,12 @@ app.use(bodyParser.urlencoded())
 const port = process.env.PORT || 3000
 
 app.get('/', async (request, response) => {
-    const content = await axios.get('https://como-fazer-logusit.firebaseio.com/teste.json')
-
-    response.render('index', { i: content.data })
+    response.render('index')
 })
 
-// Chamando todas as rotas de CATEGORIAS
+// Chamando todas as rotas
 app.use('/categorias', categorias)
+app.use('/publicacoes', publicacoes)
 
 // GERAL
 // Caso der erro ao ouvir a porta...
