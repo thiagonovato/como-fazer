@@ -1,5 +1,19 @@
-<form method="POST" action='/publicacoes/editar/<%= publicacao.id %>'>
-    <input placeholder="Insira o nome da publicacao" type='text' name='nome' value="<%= publicacao.publicacao.nome %>" /><br />
-    <textarea placeholder="Insira a descricao da publicacao" type='text' name='descricao'><%= publicacao.publicacao.descricao %></textarea>
-    <button>Salvar edição</button>
+<%- include('../header') %>
+
+
+<form method="POST" action='/publicacoes/editar/<%= categoria %>/<%= publicacao.id %>'>
+    <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Digite o título" value="<%= publicacao.titulo %>">
+    </div>
+
+    <div class="form-group">
+        <label for="conteudo">Conteúdo</label>
+        <textarea class="form-control" id="conteudo" name="conteudo" placeholder="Digite o conteúdo"><%= publicacao.conteudo %></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
 </form>
+
+
+<%- include('../footer') %>

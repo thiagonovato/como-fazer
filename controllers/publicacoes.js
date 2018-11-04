@@ -1,44 +1,43 @@
 const api = require('../api')
 
-const novaForm = (req, res) => {
-    res.render('publicacoes/nova')
+const novaForm = async (req, res) => {
+    const categorias = await api.list('categorias')
+    res.render('publicacoes/nova', { categorias })
 }
 
 const nova = async (req, res) => {
-    await api.create('publicacoes', {
-        publicacao: {
-            nome: req.body.nome,
-            descricao: req.body.descricao
-        }
+    await api.create('publicacoes/' + req.body.categoria, {
+        titulo: req.body.titulo,
+        conteudo: req.body.conteudo
     })
-    res.redirect('/publicacoes')
+    res.redirect('/publicacoes/categoria/' + req.body.categoria)
 }
 
 const list = async (req, res) => {
-    const publicacoes = await api.list('publicacoes')
-    res.render('publicacoes/index', { publicacoes })
+    const categoria = req.params.categoria
+    const publicacoes = await api.list('publicacoes/' + categoria)
+    res.render('publicacoes/index', { publicacoes, categoria })
 }
 
 const excluir = async (req, res) => {
-    await api.apagar('publicacoes', req.params.id)
-    res.redirect('/publicacoes')
+    await api.apagar('publicacoes/' + req.params.categoria, req.params.id)
+    res.redirect('/publicacoes/categoria/' + req.params.categoria)
 }
 
 const editarForm = async (req, res) => {
-    const publicacao = await api.get(`publicacoes`, req.params.id)
+    const publicacao = await api.get('publicacoes/' + req.params.categoria, req.params.id)
     res.render('publicacoes/editar', {
-        publicacao
+        publicacao,
+        categoria: req.params.categoria
     })
 }
 
 const updateForm = async (req, res) => {
-    await api.update('publicacoes', req.params.id, {
-        publicacao: {
-            nome: req.body.nome,
-            descricao: req.body.descricao
-        }
+    await api.update('publicacoes/' + req.params.categoria, req.params.id, {
+        titulo: req.body.titulo,
+        conteudo: req.body.conteudo
     })
-    res.redirect('/publicacoes')
+    res.redirect('/publicacoes/categoria/' + req.params.categoria)
 }
 
 module.exports = {
